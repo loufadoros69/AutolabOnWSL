@@ -1,4 +1,5 @@
 #!/usr/bin/bash
+# kante copy paste to arxeio se enan text editor kai apo8hkeyste to ws autolab.sh
 # molis to katevasete, kante chmod +x autolab.sh gia na mporesei na ektelestei
 # oi fakeloi kai ta directories prepei na alaxtoun apo ton teliko xrhsth
 
