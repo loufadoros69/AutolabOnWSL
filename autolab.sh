@@ -1,4 +1,6 @@
 #!/usr/bin/bash
+# molis to katevasete, kante chmod +x autolab.sh gia na mporesei na ektelestei
+# oi fakeloi kai ta directories prepei na alaxtoun apo ton teliko xrhsth
 
 cp -r hw2submit ~/
 cd ~/hw2submit
