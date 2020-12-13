@@ -1,6 +1,5 @@
 #!/usr/bin/bash
-# kante copy paste to arxeio se enan text editor kai apo8hkeyste to ws autolab.sh
-# molis to katevasete, kante chmod +x autolab.sh gia na mporesei na ektelestei
+# KOITAJTE TIS ODHGIES STO MAIN PAGE
 
 export cwd=$cwd$(pwd)
 cp -r folder_to_be_uploaded ~/
