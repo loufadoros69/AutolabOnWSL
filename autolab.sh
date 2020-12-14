@@ -8,5 +8,5 @@ chmod a-x *
 cd ../
 tar -czvf folder_to_be_uploaded.tar.gz folder_to_be_uploaded/
 cp folder_to_be_uploaded.tar.gz "$cwd"
-rm -rf folder_to_be_uploaded*
+rm -rf folder_to_be_uploaded/ folder_to_be_uploaded.tar.gz
 cd "$cwd"
