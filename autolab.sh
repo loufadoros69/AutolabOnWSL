@@ -1,12 +1,32 @@
 #!/usr/bin/bash
 # KOITAJTE TIS ODHGIES STO MAIN PAGE
 
-export cwd=$cwd$(pwd)
-cp -r folder_to_be_uploaded ~/
-cd ~/folder_to_be_uploaded
-chmod a-x *
-cd ../
-tar -czvf folder_to_be_uploaded.tar.gz folder_to_be_uploaded/
-cp folder_to_be_uploaded.tar.gz "$cwd"
-rm -rf folder_to_be_uploaded/ folder_to_be_uploaded.tar.gz
-cd "$cwd"
+if [ $# -ne '1' ] 
+then
+    echo "Wrong arguments"
+    echo "Usage: ./autolab.sh <folder_to_be_uploaded>"
+    exit -1
+fi
+export cwd=$(pwd)
+export folder_tbu=$1
+if [ -d $folder_tbu ] 
+then
+    if [ -d ~/$folder_tbu ]
+    then
+        echo "Folder $folder_tbu exists in home dir. Aborting!"
+        exit -1
+    else
+        cp -r $folder_tbu ~/
+        cd ~/$folder_tbu
+        chmod a-x *
+        cd ../
+        tar -czvf $folder_tbu.tar.gz $folder_tbu/
+        cp $folder_tbu.tar.gz "$cwd"
+        rm -rf $folder_tbu/ $folder_tbu.tar.gz
+        cd "$cwd"
+        exit 0
+    fi
+else
+    echo "Folder $folder_tbu doesn't exist at all. Aborting!"
+    exit -1
+fi
