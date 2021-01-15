@@ -18,7 +18,7 @@ if [ -d $folder_tbu ]
 then
     if [ -d ~/$folder_tbu ]
     then
-        echo "Folder $folder_tbu exists in home dir. Aborting!"
+        echo "error: Folder $folder_tbu exists in home dir. Aborting!"
         exit -1
     else
         cp -r $folder_tbu ~/
@@ -32,6 +32,6 @@ then
         exit 0
     fi
 else
-    echo "Folder $folder_tbu doesn't exist at all. Aborting!"
+    echo "error: Folder $folder_tbu doesn't exist at all. Aborting!"
     exit -1
 fi
