@@ -9,6 +9,11 @@ then
 fi
 export cwd=$(pwd)
 export folder_tbu=$1
+if [ ${folder_tbu:${#folder_tbu}-1} == "/" ]
+then
+    export folder_tbu=${folder_tbu%/}
+fi
+
 if [ -d $folder_tbu ] 
 then
     if [ -d ~/$folder_tbu ]
