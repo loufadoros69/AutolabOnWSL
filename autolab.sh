@@ -29,6 +29,7 @@ then
         cp $folder_tbu.tar.gz "$cwd"
         rm -rf $folder_tbu/ $folder_tbu.tar.gz
         cd "$cwd"
+        echo "DONE"
         exit 0
     fi
 else
