@@ -16,23 +16,18 @@ fi
 
 if [ -d $folder_tbu ] 
 then
-    if [ -d ~/$folder_tbu ]
-    then
-        echo "error: Folder $folder_tbu exists in home dir. Aborting!"
-        exit -1
-    else
-        cp -r $folder_tbu ~/
-        cd ~/$folder_tbu
-        chmod a-x *
-        cd ../
-        tar -czvf $folder_tbu.tar.gz $folder_tbu/
-        cp $folder_tbu.tar.gz "$cwd"
-        rm -rf $folder_tbu/ $folder_tbu.tar.gz
-        cd "$cwd"
-        echo "DONE"
-        exit 0
-    fi
+	export temp_folder=$(mktemp -d)
+    cp -r $folder_tbu $temp_folder/$folder_tbu
+	cd $temp_folder/$folder_tbu
+    chmod a-x *
+	cd ../
+    tar -czvf $folder_tbu.tar.gz $folder_tbu/
+    cp $folder_tbu.tar.gz "$cwd"
+	rm -r $temp_folder
+	cd "$cwd"
+    echo "DONE"
+    exit 0
 else
     echo "error: Folder $folder_tbu doesn't exist at all. Aborting!"
-    exit -1
+    exit 1
 fi
