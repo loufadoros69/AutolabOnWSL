@@ -1,10 +1,9 @@
 #!/usr/bin/bash
-# KOITAJTE TIS ODHGIES STO MAIN PAGE
 
 if [ $# -ne '1' ] 
 then
     echo "Wrong arguments"
-    echo "Usage: ./autolab.sh <folder_to_be_uploaded>"
+    echo "Usage: ./tar.sh <folder_to_be_uploaded>"
     exit -1
 fi
 export cwd=$(pwd)
