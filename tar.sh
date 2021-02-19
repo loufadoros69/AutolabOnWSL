@@ -3,7 +3,7 @@
 if [ $# -ne '1' ] 
 then
     echo "Wrong arguments"
-    echo "Usage: ./tar.sh <folder_to_be_uploaded>"
+    echo "Usage: $0 <folder_to_be_uploaded>"
     exit -1
 fi
 export cwd=$(pwd)
