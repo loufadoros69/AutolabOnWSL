@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-if [ $# -lt '2' ] && [ $# -gt '1' ]
+if [ $# -gt 2 ] || [ $# -lt 1 ]
 then
     echo "Wrong arguments"
     echo "Usage: $0 <folder_to_be_uploaded> <filename of .tar.gz or leave blank for default>"
@@ -30,8 +30,11 @@ then
 	then
 		export temp=${folder_tbu:3}
 	fi
+else 
+	export temp=$folder_tbu
 fi
-
+# echo $folder_tbu
+# echo $temp
 if [ -d $folder_tbu ] 
 then
 	export temp_folder=$(mktemp -d)
