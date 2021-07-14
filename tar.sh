@@ -3,7 +3,7 @@
 if [ $# -ne '1' ] 
 then
     echo "Wrong arguments"
-    echo "Usage: $0 <folder_to_be_uploaded>"
+    echo "Usage: $0 <folder_to_be_uploaded> <filename of .tar.gz or leave blank for default>"
     exit -1
 fi
 export cwd=$(pwd)
@@ -13,15 +13,40 @@ then
     export folder_tbu=${folder_tbu%/}
 fi
 
+if [ ${folder_tbu:0:1} = '/' ]
+then
+	
+	export temp=${folder_tbu##/*/}
+	if [ $temp = $folder_tbu ]
+	then 
+		export temp=${folder_tbu:1}
+	fi
+
+elif [ ${folder_tbu:0:3} = "../" ]
+then
+	
+	export temp=${folder_tbu##../*/}
+	if [ $temp = $folder_tbu ]
+	then
+		export temp=${folder_tbu:3}
+	fi
+fi
+
 if [ -d $folder_tbu ] 
 then
 	export temp_folder=$(mktemp -d)
-   	cp -r $folder_tbu $temp_folder/$folder_tbu
-	cd $temp_folder/$folder_tbu
+	echo $temp_folder
+	cp -r $folder_tbu $temp_folder/$temp
+	cd $temp_folder/$temp
 	chmod a-x *
 	cd ../
-	tar -czvf $folder_tbu.tar.gz $folder_tbu/
-	cp $folder_tbu.tar.gz "$cwd"
+	if [ $# -ne '2' ]
+	then
+		export name=$2
+	fi
+	name=${temp,,}
+	tar -czvf $name.tar.gz $temp/
+	cp $name.tar.gz "$cwd"
 	rm -r $temp_folder
 	cd "$cwd"
 	echo "DONE"
