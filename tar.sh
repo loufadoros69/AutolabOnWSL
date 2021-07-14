@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 
-if [ $# -ne '1' ] 
+if [ $# -lt '2' ] && [ $# -gt '1' ]
 then
     echo "Wrong arguments"
     echo "Usage: $0 <folder_to_be_uploaded> <filename of .tar.gz or leave blank for default>"
@@ -40,11 +40,12 @@ then
 	cd $temp_folder/$temp
 	chmod a-x *
 	cd ../
-	if [ $# -ne '2' ]
+	if [ $# -eq '2' ]
 	then
 		export name=$2
+	else
+		name=${temp,,}
 	fi
-	name=${temp,,}
 	tar -czvf $name.tar.gz $temp/
 	cp $name.tar.gz "$cwd"
 	rm -r $temp_folder
