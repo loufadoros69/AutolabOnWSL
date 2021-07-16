@@ -1,4 +1,22 @@
-#!/usr/bin/bash
+#!/bin/bash
+
+function removeExec () {
+	SAVEIFS=$IFS
+	IFS=$(echo -en "\n\b")
+	FILES=$1
+	FILES+=/*
+	for f in $FILES
+	do
+		# echo "$f"
+		if [ -d "$f" ]; then
+			removeExec "$f"
+		elif [ -e "$f" ]; then
+			chmod a-x "$f"
+		fi
+	done
+	# restore $IFS
+	IFS=$SAVEIFS
+}
 
 if [ $# -gt 2 ] || [ $# -lt 1 ]
 then
@@ -38,17 +56,18 @@ fi
 if [ -d $folder_tbu ] 
 then
 	export temp_folder=$(mktemp -d)
-	echo $temp_folder
+	# echo $temp_folder
 	cp -r $folder_tbu $temp_folder/$temp
 	cd $temp_folder/$temp
-	chmod a-x *
+	file="$temp_folder/$temp"
+	removeExec $file
 	cd ../
 	if [ $# -eq '2' ]
 	then
 		export name=$2
 	else
 		name=${temp,,}
-	fi
+	fi	
 	tar -czvf $name.tar.gz $temp/
 	cp $name.tar.gz "$cwd"
 	rm -r $temp_folder
